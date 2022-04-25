@@ -4,17 +4,22 @@ import {AligntRightDiv, SettingsDiv} from './styles/navbar.styled'
 
 const Navbar = props => {
     const diffrentNubmersOfImages = [12, 18, 24];
+    const differentCardSets = ["default", "animals", "snowman"];
 
     const [numberOfCards, setNumberOfCards] = React.useState(18);
+    const [cardSet, setCardSet] = React.useState(2);
 
-    const handleChange = (event) => {
+    const handleNumberOfCardsChange = (event) => {
         setNumberOfCards(event.target.value);
     };
 
-    const start = () => {
-        props.start(numberOfCards);
-    }
+    const handleCardSetChange = (event) => {
+        setCardSet(event.target.value);
+    };
 
+    const start = () => {
+        props.start(numberOfCards, cardSet);
+    }
 
     return (
         <Box sx={{flexGrow: 1}}>
@@ -26,11 +31,31 @@ const Navbar = props => {
                     <SettingsDiv>
                         <Box sx={{minWidth: 180}} className="numberOfCards">
                             <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Number of Cards</InputLabel>
+                                <InputLabel id="demo-simple-select-label">Card sets</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    onChange={handleChange}
+                                    label="Card Sets"
+                                    onChange={handleCardSetChange}
+                                    value={cardSet}
+                                >
+                                    {differentCardSets.map((number, index) => (
+                                        <MenuItem value={index + 1} key={number}>{number}</MenuItem>
+                                    ))}
+
+                                </Select>
+                            </FormControl>
+                        </Box>
+                    </SettingsDiv>
+                    <SettingsDiv>
+                        <Box sx={{minWidth: 180}} className="numberOfCards">
+                            <FormControl fullWidth>
+                                <InputLabel id="demo-simple-select-label">Number of cards</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    label="Number of cards"
+                                    onChange={handleNumberOfCardsChange}
                                     value={numberOfCards}
                                 >
                                     {diffrentNubmersOfImages.map((number) => (

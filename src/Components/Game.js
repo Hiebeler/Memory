@@ -5,13 +5,14 @@ import Card from "./Card";
 export class Game extends React.Component {
 
     images = [];
-
+    cardSet = 1;
     time = null;
     imagePosition = [];
 
     constructor(props) {
         super(props);
         this.images = props.images;
+        this.cardSet = props.cardSet;
         let {grid} = this.createGrid();
         this.state = {
             grid,
@@ -74,7 +75,7 @@ export class Game extends React.Component {
         }
         grid[position] = (<Grid item lg={2} md={4} sm={4} xs={6} key={position}><Card image={image}
                                                                                       clicked={() => this.handleClick(position)}
-                                                                                      open={visibility}/></Grid>);
+                                                                                      open={visibility} cardSet={this.cardSet}/></Grid>);
         return grid;
     }
 
@@ -113,6 +114,7 @@ export class Game extends React.Component {
     }
 
     render() {
+        console.log(this.cardSet);
         return (
             <div>
                 <h1>{this.checkIfWon()}</h1>

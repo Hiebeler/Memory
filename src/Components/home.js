@@ -2,22 +2,21 @@ import React from 'react';
 import {Game} from "./Game";
 import Navbar from "./navbar";
 
-
 class Home extends React.Component {
 
     images = [
-        "boat1.png",
-        "boat2.png",
-        "boat3.png",
-        "boat4.png",
-        "boat5.png",
-        "boat6.png",
-        "bus.png",
-        "car.png",
-        "car2.png",
-        "helicopter.png",
-        "plane.png",
-        "taxi.png"
+        "1.png",
+        "2.png",
+        "3.png",
+        "4.png",
+        "5.png",
+        "6.png",
+        "7.png",
+        "8.png",
+        "9.png",
+        "10.png",
+        "11.png",
+        "12.png"
     ]
 
     constructor() {
@@ -28,13 +27,12 @@ class Home extends React.Component {
         }
     }
 
-    start = (numberOfCards) => {
+    start = (numberOfCards, cardSet) => {
         let images = this.images;
         if (numberOfCards / 2 !== this.images.length)
             images = this.getShortenedImagesArray(numberOfCards);
-        let mainPage = (<Game images={images} key={this.createUniqueId()}/>);
+        let mainPage = (<Game images={images} cardSet={cardSet} key={this.createUniqueId()}/>);
         this.setState({mainPage});
-        this.isGameRunning = true;
     }
 
     getShortenedImagesArray = numberOfCards => {
