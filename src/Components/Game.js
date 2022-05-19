@@ -3,7 +3,6 @@ import Grid from "@mui/material/Grid";
 import Card from "./Card";
 import {Box, Button} from "@mui/material";
 import {NamePrompt} from "./namePrompt";
-import {db} from "../firebase";
 
 export class Game extends React.Component {
 
@@ -125,12 +124,6 @@ export class Game extends React.Component {
 
     handleClickOpenModal() {
         this.setState({openNamePrompt: !this.state.openNamePrompt})
-    }
-
-    async saveToFirebase(name) {
-        db.collection("test").add({
-            "test": "tset",
-        })
     }
 
     render() {
