@@ -1,6 +1,9 @@
 import React from 'react';
 import Grid from "@mui/material/Grid";
 import Card from "./Card";
+import {Box, Button} from "@mui/material";
+import {NamePrompt} from "./namePrompt";
+import {db} from "../firebase";
 
 export class Game extends React.Component {
 
@@ -8,17 +11,20 @@ export class Game extends React.Component {
     cardSet = 1;
     time = null;
     imagePosition = [];
+    difficulty = 2000;
 
     constructor(props) {
         super(props);
         this.images = props.images;
         this.cardSet = props.cardSet;
+        this.difficulty = props.difficulty;
         let {grid} = this.createGrid();
         this.state = {
             grid,
             clicked: [],
             found: [],
             countScore: 0,
+            openNamePrompt: false
         }
     }
 
@@ -36,7 +42,7 @@ export class Game extends React.Component {
                     let found = this.checkIfFoundPair(clicked);
                     clicked = [];
                     this.setState({grid, clicked, countScore, found});
-                }, 1000);
+                }, this.difficulty);
             }
             this.setState({grid, clicked, countScore});
         }
@@ -75,7 +81,8 @@ export class Game extends React.Component {
         }
         grid[position] = (<Grid item lg={2} md={4} sm={4} xs={6} key={position}><Card image={image}
                                                                                       clicked={() => this.handleClick(position)}
-                                                                                      open={visibility} cardSet={this.cardSet}/></Grid>);
+                                                                                      open={visibility}
+                                                                                      cardSet={this.cardSet}/></Grid>);
         return grid;
     }
 
@@ -107,18 +114,38 @@ export class Game extends React.Component {
 
     checkIfWon() {
         if (this.state.found.length >= (this.images.length * 2)) {
-            let timediffrence = Date.now()- this.time;
-            return "WON In " + timediffrence.toLocaleString() + "s";
+            return true;
         }
-        return null;
+        return false;
+    }
+
+    saveScore() {
+        this.handleClickOpenModal();
+    }
+
+    handleClickOpenModal() {
+        this.setState({openNamePrompt: !this.state.openNamePrompt})
+    }
+
+    async saveToFirebase(name) {
+        db.collection("test").add({
+            "test": "tset",
+        })
     }
 
     render() {
         console.log(this.cardSet);
+        let won = this.checkIfWon();
+        let timediffrence = Date.now() - this.time;
         return (
             <div>
-                <h1>{this.checkIfWon()}</h1>
-                <h4>score: {this.state.countScore}</h4>
+                <Box sx={{m: 2}}>
+                    {this.state.openNamePrompt ? <NamePrompt saveToFirebase={this.saveToFirebase}/> : null}
+                    <h1>{won ? ("WON In " + timediffrence.toLocaleString() + "s") : null}</h1>
+                    <h4>score: {this.state.countScore}</h4>
+                    {!won ? (<Button variant="contained" color="secondary"
+                                     onClick={() => this.saveScore()}>save</Button>) : null}
+                </Box>
                 <Grid container spacing={5}>
                     {this.state.grid}
                 </Grid>

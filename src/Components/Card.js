@@ -17,7 +17,7 @@ const Card = props => {
                 alignItems="center"
                 justifyContent="center"
             >
-                <img src={imageLink} alt="not found" onClick={clicked} height="200px"/>
+                <img src={imageLink} alt="not found" onClick={clicked} width="200px" height="200px"/>
             </Box>
         </div>
     );

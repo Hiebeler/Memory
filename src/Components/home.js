@@ -2,6 +2,7 @@ import React from 'react';
 import {Game} from "./Game";
 import Navbar from "./navbar";
 
+
 class Home extends React.Component {
 
     images = [
@@ -27,11 +28,11 @@ class Home extends React.Component {
         }
     }
 
-    start = (numberOfCards, cardSet) => {
+    start = (numberOfCards, cardSet, difficulty) => {
         let images = this.images;
         if (numberOfCards / 2 !== this.images.length)
             images = this.getShortenedImagesArray(numberOfCards);
-        let mainPage = (<Game images={images} cardSet={cardSet} key={this.createUniqueId()}/>);
+        let mainPage = (<Game images={images} cardSet={cardSet} difficulty={difficulty} key={this.createUniqueId()}/>);
         this.setState({mainPage});
     }
 
