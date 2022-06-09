@@ -12,7 +12,16 @@ app.use(cors())
 
 
 app.get('/api/getScoreboard', (req, res) => {
-    res.send("moin");
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var dbo = db.db("memory");
+        dbo.collection("scoreBoard").find({}).toArray(function(err, result) {
+          if (err) throw err;
+          console.log(result.name);
+          db.close();
+          res.send(result);
+        });
+      });
 });
 
 app.post('/api/postScore', (req, res) => {
