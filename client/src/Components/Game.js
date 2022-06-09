@@ -133,7 +133,7 @@ export class Game extends React.Component {
         return (
             <div>
                 <Box sx={{m: 2}}>
-                    {this.state.openNamePrompt ? <NamePrompt saveToFirebase={this.saveToFirebase}/> : null}
+                    {won ? <NamePrompt score={this.state.countScore}/> : null}
                     <h1>{won ? ("WON In " + timediffrence.toLocaleString() + "s") : null}</h1>
                     <h4>score: {this.state.countScore}</h4>
                     {!won ? (<Button variant="contained" color="secondary"

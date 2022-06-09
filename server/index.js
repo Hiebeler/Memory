@@ -1,5 +1,6 @@
 var express = require('express')
 const path = require('path');
+const cors=require("cors");
 
 var app = express();
 app.use(express.json())
@@ -7,6 +8,7 @@ app.use(express.json())
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://mongoadmin:mypasswd@10.115.3.24:8017/";
 
+app.use(cors())
 
 
 app.get('/api/getScoreboard', (req, res) => {

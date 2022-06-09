@@ -12,9 +12,14 @@ export const NamePrompt = props => {
     const [open, setOpen] = React.useState(true);
     const [name, setName] = React.useState("");
 
-
-    const handleClose = () => {
-        props.saveToFirebase(name);
+    const handleClose = async () => {
+        console.log(name + " " + props.score);
+        const response = await fetch('http://localhost:8080/api/postScore', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({'name': name, 'score': props.score}),
+        })
+        console.log(response);
         setOpen(false);
     };
 
