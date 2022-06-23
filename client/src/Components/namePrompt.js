@@ -14,7 +14,7 @@ export const NamePrompt = props => {
 
     const handleClose = async () => {
         console.log(name + " " + props.score);
-        const response = await fetch('http://localhost:8080/api/postScore', {
+        const response = await fetch('http://10.115.3.24:8080/api/postScore', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({'name': name, 'score': props.score}),
