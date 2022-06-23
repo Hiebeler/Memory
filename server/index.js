@@ -15,7 +15,7 @@ app.get('/api/getScoreboard', (req, res) => {
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
         var dbo = db.db("memory");
-        dbo.collection("scoreBoard").find().sort( { "score": -1 } ).toArray(function(err, result) {
+        dbo.collection("scoreBoard").find().sort( { "score": 1 } ).toArray(function(err, result) {
           if (err) throw err;
           console.log(result.name);
           db.close();
