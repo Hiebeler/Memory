@@ -1,6 +1,7 @@
 import React from 'react';
 import {Game} from "./Game";
 import Navbar from "./navbar";
+import Ranking from "./Ranking";
 
 
 class Home extends React.Component {
@@ -22,7 +23,7 @@ class Home extends React.Component {
 
     constructor() {
         super();
-        let mainPage = (<h1>The record is 26 tries</h1>)
+        let mainPage = (<Ranking/>)
         this.state = {
             mainPage: mainPage
         }

@@ -11,7 +11,7 @@ class Rankings extends React.Component {
 
     async componentDidMount() {
         const fetchUserEmail = async () => {
-            return fetch("http://localhost:8080/api/getScoreboard").then(async (data) => {
+            return fetch("http://10.115.3.24:8080/api/getScoreboard").then(async (data) => {
                 return await data.json()
             });
         };
